@@ -665,25 +665,6 @@ function home(){return `
  ].map((o,i)=>`<article class="offer-card ${i===offerSlide?'is-active':''}" data-offer-card="${i}" aria-label="${esc(o.title)}" aria-hidden="${i!==offerSlide}"><div class="offer-copy"><div class="offer-category">${o.number} / ${o.type}</div><h3>${esc(o.title)}</h3><p class="offer-lead">${esc(o.lead)}</p><p class="offer-description">${esc(o.description)}</p><div class="offer-fit"><strong>Best for:</strong> <span>${esc(o.best)}</span></div><button class="offer-cta" data-go="${o.route}">${esc(o.cta)} <span class="round-icon" aria-hidden="true">↗</span></button></div><div class="offer-media" style="background-image:url('${heroFallbackImage}');background-size:cover;background-position:center"><img src="${esc(safeImg(o.image))}" alt="Endurance athlete in training — temporary editorial photograph" loading="lazy" onerror="this.style.display='none'"><div class="offer-photo-caption">${o.number} / SHERIDAN PERFORMANCE</div></div></article>`).join('')}</div></div>
  <div class="offer-controls"><div class="offer-counter" id="offer-counter"><b>0${offerSlide+1}</b> / 03</div><div class="offer-controls-right"><span>Explore the options</span><button class="offer-arrow" aria-label="Previous offer" data-offer-step="-1">←</button><button class="offer-arrow" aria-label="Next offer" data-offer-step="1">→</button></div></div><div class="offer-after"><span>Not sure where to begin? Tell us what you have in mind.</span>${btn('apply','Start a conversation ↗','button')}</div><p class="offer-disclaimer">Example copy and stock imagery for concept review. Package details and pricing subject to Sheridan team confirmation.</p></div></section>
 
-<section class="spx-difference" id="our-approach">
- <div class="container">
-  <div class="spx-diff-heading">
-   <div><div class="spx-label">THE SHERIDAN DIFFERENCE / WHAT YOU CAN EXPECT</div><h2>NOT JUST A PLAN.<br><span>AN APPROACH BUILT<br>AROUND YOU.</span></h2></div>
-   <div class="spx-diff-intro"><p>Elite-sport thinking meets the reality of a full life. Whether the goal is a first endurance event or a challenge that brings a team together, the work should feel purposeful, supported and personal.</p><button class="spx-text-link" data-go="coaching">HOW THE COACHING WORKS <span>↗</span></button></div>
-  </div>
-  <div class="spx-diff-grid">
-   <article><span class="spx-feature-index">01 /</span><h3>YOUR LIFE SETS THE CONTEXT.</h3><p>Training planned around your goal, available time, travel, career and family — with adjustments when circumstances change.</p></article>
-   <article><span class="spx-feature-index">02 /</span><h3>REAL HUMAN SUPPORT.</h3><p>Regular coaching conversations, direct guidance and accountability, with specialist input where the journey calls for it.</p></article>
-   <article><span class="spx-feature-index">03 /</span><h3>PROGRESS WITH PURPOSE.</h3><p>Use relevant performance data, technique feedback and progressive preparation to make each session count.</p></article>
-   <article><span class="spx-feature-index">04 /</span><h3>MORE THAN RACE DAY.</h3><p>Make the challenge meaningful, whether that's building confidence, connecting a team or documenting an unforgettable first IRONMAN.</p></article>
-  </div>
- </div>
-</section>
-<section class="spx-photo-band">
- <div class="spx-photo-band-image" style="background-image:linear-gradient(90deg,#0e1214ec,#0e121446 72%),url('${heroFallbackImage}')"></div>
- <div class="container spx-photo-band-body"><span class="spx-label">THE LONG GAME / DONE RIGHT</span><h2>THE RACE IS ONE DAY.<br>THE JOURNEY CHANGES MORE.</h2><button class="spx-band-link" data-go="ironman">DISCOVER BEYOND THE BOARDROOM <span>↗</span></button></div>
-</section>
-
 <section class="spx-testimonials" id="client-stories">
  <div class="container">
   <div class="spx-testimonials-heading"><div><span class="spx-label">CLIENT STORIES / THE PEOPLE BEHIND THE PROGRESS</span><h2>THE STORIES THAT<br><em>MATTER MOST.</em></h2></div><p>A glimpse of how first-hand experiences could bring the Sheridan approach to life. Real, approved client words will replace these samples.</p></div>
@@ -704,6 +685,25 @@ function home(){return `
  </div>
 </section>
 
+<section class="spx-photo-band">
+ <div class="spx-photo-band-image" style="background-image:linear-gradient(90deg,#0e1214ec,#0e121446 72%),url('${heroFallbackImage}')"></div>
+ <div class="container spx-photo-band-body"><span class="spx-label">THE LONG GAME / DONE RIGHT</span><h2>THE RACE IS ONE DAY.<br>THE JOURNEY CHANGES MORE.</h2><button class="spx-band-link" data-go="ironman">DISCOVER BEYOND THE BOARDROOM <span>↗</span></button></div>
+</section>
+
+<section class="spx-difference" id="our-approach">
+ <div class="container">
+  <div class="spx-diff-heading">
+   <div><div class="spx-label">THE SHERIDAN DIFFERENCE / WHAT YOU CAN EXPECT</div><h2>NOT JUST A PLAN.<br><span>AN APPROACH BUILT<br>AROUND YOU.</span></h2></div>
+   <div class="spx-diff-intro"><p>Elite-sport thinking meets the reality of a full life. Whether the goal is a first endurance event or a challenge that brings a team together, the work should feel purposeful, supported and personal.</p><button class="spx-text-link" data-go="coaching">HOW THE COACHING WORKS <span>↗</span></button></div>
+  </div>
+  <div class="spx-diff-grid">
+   <article><span class="spx-feature-index">01 /</span><h3>YOUR LIFE SETS THE CONTEXT.</h3><p>Training planned around your goal, available time, travel, career and family — with adjustments when circumstances change.</p></article>
+   <article><span class="spx-feature-index">02 /</span><h3>REAL HUMAN SUPPORT.</h3><p>Regular coaching conversations, direct guidance and accountability, with specialist input where the journey calls for it.</p></article>
+   <article><span class="spx-feature-index">03 /</span><h3>PROGRESS WITH PURPOSE.</h3><p>Use relevant performance data, technique feedback and progressive preparation to make each session count.</p></article>
+   <article><span class="spx-feature-index">04 /</span><h3>MORE THAN RACE DAY.</h3><p>Make the challenge meaningful, whether that's building confidence, connecting a team or documenting an unforgettable first IRONMAN.</p></article>
+  </div>
+ </div>
+</section>
 <section class="spx-application-lead" id="home-application"><div class="container"><span class="spx-label">YOUR NEXT CHAPTER / START HERE</span><div class="spx-application-lead-inner"><h2>YOU BRING<br>THE AMBITION.</h2><p>Tell us what you're working towards. A few thoughtful answers are the first step towards a conversation about what's possible.</p></div></div></section>
 <div class="spx-home-form">${apply()}</div>
 `;}
