@@ -558,25 +558,27 @@
 @media(prefers-reduced-motion:reduce){.spx-proof-track{animation:none}.spx-hero-routes button{transition:none}.spx-quotes-track{transition:none!important}}
 
   
-    /* Hero footer: anchor both labels to the image edge, independent of headline/CTAs. */
-    .spx-hero-inner{position:relative}
+    /* The labels are a direct child of the hero, not the vertically centered text block.
+       Anchor them to the image section itself, not to the CTAs. */
     .spx-hero-bottom{
       position:absolute;
+      left:50%;
+      right:auto;
       bottom:22px;
-      left:38px;
-      right:38px;
-      width:auto;
-      max-width:none;
+      transform:translateX(-50%);
+      width:100%;
+      max-width:var(--max);
+      padding:0 38px;
       margin:0;
-      padding:0;
       align-self:auto;
       display:flex;
       justify-content:space-between;
       align-items:center;
       pointer-events:none;
+      z-index:2;
     }
     @media(max-width:720px){
-      .spx-hero-bottom{left:25px;right:25px;bottom:17px;padding:0}
+      .spx-hero-bottom{padding:0 25px;bottom:17px}
     }
 </style>
 </head>
@@ -662,8 +664,8 @@ function home(){return `
       <button class="spx-btn-primary" data-scroll-target="three-offers">EXPLORE THE THREE JOURNEYS <span aria-hidden="true">↗</span></button>
       <button class="spx-btn-ghost" data-scroll-target="home-application">START YOUR APPLICATION <span aria-hidden="true">↗</span></button>
     </div>
-    <div class="spx-hero-bottom"><span>SWIM / BIKE / RUN / BEYOND</span><span>PERFORMANCE IS PERSONAL.</span></div>
   </div>
+  <div class="container spx-hero-bottom"><span>SWIM / BIKE / RUN / BEYOND</span><span>PERFORMANCE IS PERSONAL.</span></div>
 </section>
 <section class="spx-proof-strip" aria-label="Our approach and credentials">
   <div class="spx-proof-marquee" aria-hidden="true"><div class="spx-proof-track">
