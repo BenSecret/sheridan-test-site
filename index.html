@@ -557,7 +557,28 @@
 @media(max-width:420px){.spx-hero h1{font-size:clamp(41px,10.6vw,54px)}.spx-hero-routes{width:100%}.spx-hero-routes button{flex:1 1 100%;justify-content:space-between;min-height:36px;padding:6px 13px}.spx-hero{min-height:640px}.spx-quotes-track .spx-quote{width:84vw;flex-basis:84vw}}
 @media(prefers-reduced-motion:reduce){.spx-proof-track{animation:none}.spx-hero-routes button{transition:none}.spx-quotes-track{transition:none!important}}
 
-  </style>
+  
+    /* Hero footer: anchor both labels to the image edge, independent of headline/CTAs. */
+    .spx-hero-inner{position:relative}
+    .spx-hero-bottom{
+      position:absolute;
+      bottom:22px;
+      left:38px;
+      right:38px;
+      width:auto;
+      max-width:none;
+      margin:0;
+      padding:0;
+      align-self:auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      pointer-events:none;
+    }
+    @media(max-width:720px){
+      .spx-hero-bottom{left:25px;right:25px;bottom:17px;padding:0}
+    }
+</style>
 </head>
 <body>
 <header id="nav"></header><main id="main"></main><footer id="footer"></footer><div id="modal-root"></div>
@@ -637,11 +658,6 @@ function home(){return `
     <div class="spx-hero-kicker"><span class="spx-signal"></span> THE SHERIDAN APPROACH / BUILT FOR AMBITIOUS LIVES <span class="spx-signal"></span></div>
     <h1>THIS IS BIGGER<br>THAN THE <span>FINISH LINE.</span></h1>
     <p>Expert coaching, extraordinary first-IRONMAN journeys and shared challenges. Built around real life — and the person you want to become.</p>
-    <!-- <nav class="spx-hero-routes" aria-label="Explore our three services">
-      <button data-go="coaching">01 / PRIVATE COACHING <span>↗</span></button>
-      <button data-go="ironman">02 / FIRST IRONMAN <span>↗</span></button>
-      <button data-go="corporate">03 / FOR TEAMS <span>↗</span></button>
-    </nav> -->
     <div class="spx-hero-actions">
       <button class="spx-btn-primary" data-scroll-target="three-offers">EXPLORE THE THREE JOURNEYS <span aria-hidden="true">↗</span></button>
       <button class="spx-btn-ghost" data-scroll-target="home-application">START YOUR APPLICATION <span aria-hidden="true">↗</span></button>
