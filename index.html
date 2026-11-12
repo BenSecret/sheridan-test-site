@@ -499,6 +499,60 @@
     }
     @media(max-width:540px){.spx-diff-grid,.spx-quotes-grid{grid-template-columns:1fr}.spx-quote{min-height:280px}.spx-hero h1{font-size:clamp(44px,11vw,61px)}.spx-hero{min-height:700px}.spx-hero p{font-size:16px}.spx-proof-inner span{font-size:9px}.spx-testimonials-heading h2{font-size:clamp(36px,9.2vw,49px)}}
     @media(prefers-reduced-motion:reduce){.spx-hero-actions button{transition:none}}
+
+    /* Optional native video styling. Playback is manual. */
+    .landing-video-frame video{width:100%;height:100%;display:block;object-fit:cover;background:#090909}
+    /* Native controls let the visitor deliberately enable audio or pause. */
+    /* In-page documentary, click-to-play embeds. */
+    .story-inline-video{max-width:1060px;margin:30px auto 0}
+    .story-inline-video .landing-video-frame{max-width:none;box-shadow:0 18px 55px rgba(0,0,0,.36)}
+    .story-inline-video .landing-video-footer{color:#cdd2d0}
+    .landing-video-frame iframe{display:block;width:100%;height:100%}
+    @media(max-width:720px){.story-inline-video{margin-top:23px}}
+
+/* Refinement 2026: Tri Guys-inspired energy, with Sheridan restraint. */
+.spx-hero{min-height:min(810px,calc(100svh - 76px));min-height:max(690px,min(810px,calc(100svh - 76px)))}
+.spx-hero-photo{background-position:center,center center,center center;filter:saturate(.78) contrast(1.13)}
+.spx-hero-scrim{background:linear-gradient(180deg,#11161772 0%,#11161731 24%,#0b10126b 61%,#0b1012d9 100%)}
+.spx-hero-inner{align-items:center;text-align:center;padding-top:88px;padding-bottom:28px}
+.spx-hero-kicker{justify-content:center;font-size:11px;letter-spacing:.18em}
+.spx-hero h1 span{white-space:nowrap;display:inline-block}
+.spx-hero h1{max-width:1120px;margin:20px auto 23px;font-size:clamp(52px,7vw,107px);line-height:.99;text-wrap:balance}
+.spx-hero p{max-width:750px;font-size:18px;line-height:1.55;margin:0 auto 27px;text-shadow:0 2px 15px #000b}
+.spx-hero-routes{display:flex;gap:7px;align-items:center;justify-content:center;margin:3px 0 24px;flex-wrap:wrap}
+.spx-hero-routes button{background:#0e1415b8;border:1px solid #f4f4ee9c;color:#f5f7f4;padding:11px 15px;font:800 10px/1.4 Manrope,sans-serif;letter-spacing:.045em;display:flex;align-items:center;gap:12px;backdrop-filter:blur(6px);transition:background .2s,border-color .2s;cursor:pointer}
+.spx-hero-routes button:hover{background:#ecece7;color:#101414;border-color:#ecece7}
+.spx-hero-routes button span{font-size:15px}
+.spx-hero-actions{justify-content:center}
+.spx-hero-actions button{min-height:51px}
+.spx-hero-bottom{justify-content:space-between;align-self:stretch;padding-top:35px;max-width:1120px}
+.spx-proof-strip{overflow:hidden;background:#eeeae5}
+.spx-proof-marquee{width:100%;white-space:nowrap;overflow:hidden}
+.spx-proof-track{display:flex;width:max-content;animation:spxProofScroll 34s linear infinite;will-change:transform}
+.spx-proof-items{display:flex;align-items:center;flex:0 0 auto}
+.spx-proof-items span{display:flex;gap:13px;align-items:center;padding:24px 31px;border-right:1px solid #c7c9c6;font:800 12px/1.4 Manrope,sans-serif;letter-spacing:.05em;text-transform:uppercase;color:#202725}
+.spx-proof-items span b{color:#bf674e;font-size:10px}
+@keyframes spxProofScroll{to{transform:translateX(-50%)}}
+.spx-proof-marquee:hover .spx-proof-track{animation-play-state:paused}
+.spx-proof-strip+.offer-section{padding-top:85px}
+/* Testimonial carousel: visible next card, infinite left/right controls, once-only entry movement. */
+.spx-quotes-viewport{overflow:hidden;width:100%;position:relative;touch-action:pan-y}
+.spx-quotes-track{position:relative;display:flex;gap:15px;align-items:stretch;width:max-content;max-width:none;will-change:transform}
+.spx-quotes-track .spx-quote{width:clamp(330px,38vw,520px);flex:0 0 clamp(330px,38vw,520px);min-height:330px}
+.spx-testimonials-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:22px;gap:20px;color:#343c39}
+.spx-testimonials-counter{font:800 15px Manrope,sans-serif;letter-spacing:.1em}
+.spx-testimonials-counter span{color:#737e77}
+.spx-testimonials-actions{display:flex;align-items:center;gap:10px}
+.spx-testimonials-actions>span{font:700 10px Manrope,sans-serif;letter-spacing:.13em;margin-right:9px}
+.spx-testimonials-actions button{border:1px solid #69716d;border-radius:50%;background:transparent;width:44px;height:44px;font-size:21px;color:#161b1a;cursor:pointer;transition:background .2s,color .2s}
+.spx-testimonials-actions button:hover{background:#161b1a;color:#fff}
+.spx-quote{border-color:#bdc7c0}
+.spx-sample-disclosure{margin-top:24px}
+@media(max-width:900px){.spx-hero h1{font-size:clamp(48px,8vw,79px)}.spx-quotes-track .spx-quote{width:min(63vw,510px);flex-basis:min(63vw,510px)}}
+@media(max-width:720px){.spx-hero{min-height:730px}.spx-hero-inner{padding-top:73px;padding-bottom:20px}.spx-hero h1{font-size:clamp(43px,10.5vw,69px)}.spx-hero p{font-size:16px;max-width:520px}.spx-hero-routes{gap:7px}.spx-hero-routes button{font-size:9px;padding:10px 11px}.spx-hero-actions{width:100%;flex-direction:column}.spx-hero-actions button{width:100%;max-width:480px;min-height:49px}.spx-hero-bottom{padding-top:25px}.spx-proof-items span{padding:19px 20px;font-size:10px}.spx-quotes-track .spx-quote{width:min(83vw,455px);flex-basis:min(83vw,455px)}.spx-testimonials-actions>span{display:none}}
+@media(max-width:420px){.spx-hero h1{font-size:clamp(41px,10.6vw,54px)}.spx-hero-routes{width:100%}.spx-hero-routes button{flex:1 1 100%;justify-content:space-between;min-height:36px;padding:6px 13px}.spx-hero{min-height:765px}.spx-quotes-track .spx-quote{width:84vw;flex-basis:84vw}}
+@media(prefers-reduced-motion:reduce){.spx-proof-track{animation:none}.spx-hero-routes button{transition:none}.spx-quotes-track{transition:none!important}}
+
   </style>
 </head>
 <body>
@@ -573,26 +627,28 @@ function card(n,s,t,d,r){return `<article class="service-card"><div><div class="
 function cta(){return `<section class="quote"><div class="container"><div class="eyebrow">START A DIFFERENT KIND OF JOURNEY</div><blockquote>Your calendar is demanding.<br><strong>Your ambition can be bigger.</strong></blockquote>${btn('apply','Apply for coaching ↗','button')}</div></section>`}
 function home(){return `
 <section class="spx-hero" aria-label="Sheridan Performance introduction">
-  <div class="spx-hero-photo" style="background-image:linear-gradient(90deg,rgba(13,16,18,.95) 2%,rgba(13,16,18,.75) 33%,rgba(13,16,18,.23) 72%,rgba(13,16,18,.25)),url('${esc(safeImg(content.heroImage))}'),url('${heroFallbackImage}')"></div>
+  <div class="spx-hero-photo" style="background-image:linear-gradient(90deg,rgba(10,14,16,.55),rgba(10,14,16,.28) 50%,rgba(10,14,16,.55)),url('${esc(safeImg(content.heroImage))}'),url('${heroFallbackImage}')"></div>
   <div class="spx-hero-scrim"></div>
   <div class="container spx-hero-inner">
-    <div class="spx-hero-kicker"><span class="spx-signal"></span> THE SHERIDAN APPROACH / BUILT FOR AMBITIOUS LIVES</div>
+    <div class="spx-hero-kicker"><span class="spx-signal"></span> THE SHERIDAN APPROACH / BUILT FOR AMBITIOUS LIVES <span class="spx-signal"></span></div>
     <h1>THIS IS BIGGER<br>THAN THE <span>FINISH LINE.</span></h1>
-    <p>Endurance coaching, extraordinary first-IRONMAN journeys and corporate challenges. Personally engineered around your work, your life and the person you want to become.</p>
+    <p>Expert coaching, extraordinary first-IRONMAN journeys and shared challenges. Built around real life — and the person you want to become.</p>
+    <nav class="spx-hero-routes" aria-label="Explore our three services">
+      <button data-go="coaching">01 / PRIVATE COACHING <span>↗</span></button>
+      <button data-go="ironman">02 / FIRST IRONMAN <span>↗</span></button>
+      <button data-go="corporate">03 / FOR TEAMS <span>↗</span></button>
+    </nav>
     <div class="spx-hero-actions">
       <button class="spx-btn-primary" data-scroll-target="three-offers">EXPLORE THE THREE JOURNEYS <span aria-hidden="true">↗</span></button>
       <button class="spx-btn-ghost" data-scroll-target="home-application">START YOUR APPLICATION <span aria-hidden="true">↗</span></button>
     </div>
-    <div class="spx-hero-bottom"><span>SWIM / BIKE / RUN / BEYOND</span><span>01 — PERFORMANCE IS PERSONAL.</span></div>
+    <div class="spx-hero-bottom"><span>SWIM / BIKE / RUN / BEYOND</span><span>PERFORMANCE IS PERSONAL.</span></div>
   </div>
-  <div class="spx-hero-edge" aria-hidden="true">PURPOSE. PREPARATION. POSSIBILITY.</div>
 </section>
-<section class="spx-proof-strip" aria-label="Our approach">
- <div class="container spx-proof-inner">
-  <div><span>01 / BESPOKE</span><strong>Built around real life.</strong></div>
-  <div><span>02 / CONNECTED</span><strong>Guidance beyond the plan.</strong></div>
-  <div><span>03 / MEANINGFUL</span><strong>Progress worth remembering.</strong></div>
- </div>
+<section class="spx-proof-strip" aria-label="Our approach and credentials">
+  <div class="spx-proof-marquee" aria-hidden="true"><div class="spx-proof-track">
+  ${Array.from({length:2},(_,k)=>`<div class="spx-proof-items">${['FORMER INTERNATIONAL ATHLETES','COACHING BUILT AROUND REAL LIFE','IRONMAN & ENDURANCE','ONE-TO-ONE ACCOUNTABILITY','PERSONAL BY DESIGN','PROGRESS WITH PURPOSE'].map((x,i)=>`<span><b>0${i+1} /</b> ${x}</span>`).join('')}</div>`).join('')}
+  </div></div>
 </section>
  <section class="offer-section" id="three-offers"><div class="container"><div class="offer-intro"><div class="eyebrow">01 / WORK WITH SHERIDAN PERFORMANCE</div><h2>${String(content.offersHeading||'').split(/\\n|\x0A/).map((line,i)=>i?`<span class="accent-text">${esc(line)}</span>`:esc(line)).join('<br>')}</h2><p>${esc(content.offersQuestion)}</p></div>
  <div class="offer-selectors" role="tablist" aria-label="Choose a Sheridan Performance service">${[
@@ -626,28 +682,56 @@ function home(){return `
 ${homeStories()}
 <section class="spx-testimonials" id="client-stories">
  <div class="container">
-  <div class="spx-testimonials-heading"><div><span class="spx-label">CLIENT VOICES / EXPERIENCE THE DIFFERENCE</span><h2>THE STORIES THAT<br><em>MATTER MOST.</em></h2></div><p>Here is how approved client testimonials could sit within the finished site. The quotations below are illustrative copy, not real reviews.</p></div>
-  <div class="spx-quotes-grid">
-   <article class="spx-quote"><div class="spx-quote-meta">01 / INDIVIDUAL COACHING <span>DESIGN PLACEHOLDER</span></div><p>“For the first time, training fitted around my life — rather than asking me to put everything else on hold.”</p><div class="spx-quote-footer"><span>Verified client quote to be added</span><span aria-hidden="true">↗</span></div></article>
-   <article class="spx-quote"><div class="spx-quote-meta">02 / FIRST IRONMAN <span>DESIGN PLACEHOLDER</span></div><p>“The support gave me the confidence to commit to an extraordinary goal. The story became bigger than the race.”</p><div class="spx-quote-footer"><span>Verified client quote to be added</span><span aria-hidden="true">↗</span></div></article>
-   <article class="spx-quote"><div class="spx-quote-meta">03 / CORPORATE CHALLENGES <span>DESIGN PLACEHOLDER</span></div><p>“A shared challenge created conversations and connections that wouldn't have happened in a meeting room.”</p><div class="spx-quote-footer"><span>Verified client quote to be added</span><span aria-hidden="true">↗</span></div></article>
-  </div>
-  <p class="spx-sample-disclosure">ILLUSTRATIVE TESTIMONIALS FOR DESIGN REVIEW ONLY — REPLACE WITH APPROVED CLIENT WORDS AND PERMISSIONS BEFORE LAUNCH.</p>
+  <div class="spx-testimonials-heading"><div><span class="spx-label">CLIENT STORIES / THE PEOPLE BEHIND THE PROGRESS</span><h2>THE STORIES THAT<br><em>MATTER MOST.</em></h2></div><p>A glimpse of how first-hand experiences could bring the Sheridan approach to life. Real, approved client words will replace these samples.</p></div>
+  <div class="spx-quotes-viewport" id="spx-quotes-viewport" aria-label="Client testimonial examples carousel"><div class="spx-quotes-track" id="spx-quotes-track"><article class="spx-quote" data-quote-card><div class="spx-quote-meta">01 / INDIVIDUAL COACHING <span>ILLUSTRATIVE PLACEHOLDER</span></div><p>“For the first time, the training plan fitted around my life, rather than the other way around.”</p><div class="spx-quote-footer"><span>Approved client testimonial to be added</span><span aria-hidden="true">↗</span></div></article>
+<article class="spx-quote" data-quote-card><div class="spx-quote-meta">02 / FIRST IRONMAN <span>ILLUSTRATIVE PLACEHOLDER</span></div><p>“What once felt impossible became a series of achievable steps, with someone helping me navigate each one.”</p><div class="spx-quote-footer"><span>Approved client testimonial to be added</span><span aria-hidden="true">↗</span></div></article>
+<article class="spx-quote" data-quote-card><div class="spx-quote-meta">03 / CORPORATE CHALLENGE <span>ILLUSTRATIVE PLACEHOLDER</span></div><p>“It gave our team a shared ambition that went far beyond anything we could have achieved in a meeting room.”</p><div class="spx-quote-footer"><span>Approved client testimonial to be added</span><span aria-hidden="true">↗</span></div></article>
+<article class="spx-quote" data-quote-card><div class="spx-quote-meta">04 / COACHING & ACCOUNTABILITY <span>ILLUSTRATIVE PLACEHOLDER</span></div><p>“The regular conversations made it easier to stay consistent when my working week became unpredictable.”</p><div class="spx-quote-footer"><span>Approved client testimonial to be added</span><span aria-hidden="true">↗</span></div></article>
+<article class="spx-quote" data-quote-card><div class="spx-quote-meta">05 / THE FIRST START LINE <span>ILLUSTRATIVE PLACEHOLDER</span></div><p>“I stopped second-guessing every session and started to understand what meaningful progress actually looked like.”</p><div class="spx-quote-footer"><span>Approved client testimonial to be added</span><span aria-hidden="true">↗</span></div></article>
+<article class="spx-quote" data-quote-card><div class="spx-quote-meta">06 / BEYOND THE BOARDROOM <span>ILLUSTRATIVE PLACEHOLDER</span></div><p>“The experience was about much more than crossing the line. It was a story I wanted to remember.”</p><div class="spx-quote-footer"><span>Approved client testimonial to be added</span><span aria-hidden="true">↗</span></div></article></div></div>
+  <div class="spx-testimonials-bottom"><span class="spx-testimonials-counter" id="spx-testimonial-count" aria-live="polite">01 <span>/ 06</span></span><div class="spx-testimonials-actions"><span>EXPLORE THE STORIES</span><button type="button" data-quote-step="-1" aria-label="Previous testimonial">←</button><button type="button" data-quote-step="1" aria-label="Next testimonial">→</button></div></div>
+  <p class="spx-sample-disclosure">ILLUSTRATIVE TESTIMONIALS FOR DESIGN REVIEW ONLY — THESE ARE NOT REAL CLIENT QUOTES. REPLACE WITH APPROVED TESTIMONIALS BEFORE PUBLICATION.</p>
  </div>
 </section>
 <section class="spx-application-lead" id="home-application"><div class="container"><span class="spx-label">YOUR NEXT CHAPTER / START HERE</span><div class="spx-application-lead-inner"><h2>YOU BRING<br>THE AMBITION.</h2><p>Tell us what you're working towards. A few thoughtful answers are the first step towards a conversation about what's possible.</p></div></div></section>
 <div class="spx-home-form">${apply()}</div>
 `;}
 
-function homeStories(){return `<section class="story-home" id="stories-home"><div class="container"><div class="eyebrow">STORIES / BEYOND THE BOARDROOM</div><div class="product-detail-heading"><h2>EVERY FINISH LINE<br>HAS A STORY.</h2><p>The effort, the setbacks, the people and the breakthroughs behind a meaningful physical challenge. Sheridan Performance captures the journey, not just the result.</p></div><div class="story-hero"><div><div class="eyebrow">ORIGINAL DOCUMENTARY SERIES</div><h2>BEYOND THE<br>BOARDROOM</h2><button class="play-trigger" data-video="story"><span class="play-circle">▷</span> WATCH THE FEATURE</button></div></div><div class="story-summary"><h3>STORIES WORTH<br>REMEMBERING.</h3><p>From a first IRONMAN to a shared corporate challenge, the greatest achievements become even more meaningful when the people and experiences behind them are remembered. <button class="text-link" data-go="ironman">Explore the first-IRONMAN journey ↗</button></p></div></div></section>`}
+function homeStories(){
+ const raw=content.storyVideo||content.ironmanVideo||defaults.ironmanVideo;
+ const filmId=ytId(raw),filmFile=html5Source(raw);
+ const media=videoMarkup(raw,'Beyond the Boardroom documentary film');
+ const watchLink=filmFile?`<a href="${esc(filmFile)}" target="_blank" rel="noopener noreferrer">OPEN VIDEO ↗</a>`:`<a href="https://www.youtube.com/watch?v=${filmId}" target="_blank" rel="noopener noreferrer">WATCH DIRECTLY ON YOUTUBE ↗</a>`;
+ const film=media?`<div class="story-inline-video"><div class="landing-video-frame">${media}</div><div class="landing-video-footer"><span>STORIES / ${filmFile?'CLICK TO PLAY':'WATCH THE FILM'}</span>${watchLink}</div></div>`:`<div class="story-hero"><div><div class="eyebrow">ORIGINAL DOCUMENTARY SERIES</div><h2>BEYOND THE<br>BOARDROOM</h2><button class="play-trigger" data-video="story"><span class="play-circle">▷</span> WATCH THE FEATURE</button></div></div>`;
+ return `<section class="story-home" id="stories-home"><div class="container"><div class="eyebrow">STORIES / BEYOND THE BOARDROOM</div><div class="product-detail-heading"><h2>EVERY FINISH LINE<br>HAS A STORY.</h2><p>The effort, the setbacks, the people and the breakthroughs behind a meaningful physical challenge. Sheridan Performance captures the journey, not just the result.</p></div>${film}<div class="story-summary"><h3>STORIES WORTH<br>REMEMBERING.</h3><p>From a first IRONMAN to a shared corporate challenge, the greatest achievements become even more meaningful when the people and experiences behind them are remembered. <button class="text-link" data-go="ironman">Explore the first-IRONMAN journey ↗</button></p></div></div></section>`;
+}
  function pageTop(k,title,sub,klass=''){return `<div class="page-header ${klass}"><div class="container"><div class="eyebrow">${k}</div><h1>${title}</h1><p>${sub}</p></div></div>`}
 function plans(){return `<section class="section next-step-section"><div class="container">${sectionHeader('THE NEXT STEP','CHOOSE YOUR<br><span class="accent-text">JOURNEY.</span>','Three ways to achieve something extraordinary. Explore the right approach for your goals.')}<div class="plans">${content.plans.map((p,i)=>`<article class="plan ${i===1?'featured':''}"><span class="kind">0${i+1} / ${esc(p.kind)}</span><h3>${esc(p.name)}</h3><p>${esc(p.description)}</p><div class="rate">${esc(p.price)}</div><button class="button ${i===1?'':'outline'}" data-go="${p.route||defaults.plans[i]?.route||'apply'}">${esc(p.cta||defaults.plans[i]?.cta||'Explore offer')} ↗</button></article>`).join('')}</div><div class="discovery-cta"><div><div class="eyebrow">NOT SURE WHERE TO BEGIN?</div><h3>LET'S FIND YOUR STARTING LINE.</h3><p>Tell us what you're working towards. We'll help you find the right approach.</p></div>${btn('apply','Book a discovery call ↗','button ink discovery-button')}</div><p class="offer-disclaimer">All packages and commercial terms are illustrative until confirmed by the Sheridan team.</p></div></section>`}
+function html5Source(raw){
+ const val=String(raw||'').trim();
+ if(!val||/[<>"'`]/.test(val))return '';
+ try{
+  const url=new URL(val,document.baseURI);
+  if(!['https:','http:'].includes(url.protocol)||!/\.(mp4|webm)$/i.test(url.pathname))return '';
+  if(url.protocol==='http:' && url.origin!==location.origin)return '';
+  return val;
+ }catch(e){return ''}
+}
+function youtubeIframe(id,title){
+  return `<iframe title="${esc(title)}" src="https://www.youtube-nocookie.com/embed/${id}?rel=0&playsinline=1" allow="encrypted-media; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" loading="lazy" allowfullscreen></iframe>`;
+}
+function videoMarkup(raw,title){
+ const file=html5Source(raw);
+ if(file)return `<video title="${esc(title)}" playsinline controls preload="metadata"><source src="${esc(file)}" type="video/${/\.webm(?:$|\?)/i.test(file)?'webm':'mp4'}">Your browser does not support this video.</video>`;
+ const id=ytId(raw);
+ return id?youtubeIframe(id,title):'';
+}
 function videoLanding({video,title,eyebrow,headline,subtitle,actionEyebrow,actionHeadline,actionText,actionLabel,filmNote}){
- const id=ytId(video);
- const player=id?`<div class="landing-video-frame"><iframe title="${esc(title)}" src="https://www.youtube-nocookie.com/embed/${id}?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" loading="lazy" allowfullscreen></iframe></div><div class="landing-video-footer"><span>${filmNote?esc(filmNote):'INTRODUCTION / WATCH THE FILM'}</span><a href="https://www.youtube.com/watch?v=${id}" target="_blank" rel="noopener noreferrer">WATCH DIRECTLY ON YOUTUBE ↗</a></div>`:`<div class="landing-video-frame landing-video-empty"><div><strong>YOUR INTRODUCTION VIDEO</strong><p>Enter a YouTube link in Editor demo → Video slots.</p></div></div>`;
+ const id=ytId(video),file=html5Source(video),media=videoMarkup(video,title);
+ const watchLink=file?`<a href="${esc(file)}" target="_blank" rel="noopener noreferrer">OPEN VIDEO ↗</a>`:`<a href="https://www.youtube.com/watch?v=${id}" target="_blank" rel="noopener noreferrer">WATCH DIRECTLY ON YOUTUBE ↗</a>`;
+ const player=media?`<div class="landing-video-frame">${media}</div><div class="landing-video-footer"><span>${filmNote?esc(filmNote):'INTRODUCTION / WATCH THE FILM'} · CLICK TO PLAY</span>${watchLink}</div>`:`<div class="landing-video-frame landing-video-empty"><div><strong>YOUR INTRODUCTION VIDEO</strong><p>Add a YouTube link or a direct video link under Editor demo → Video slots.</p></div></div>`;
  return `<section class="landing-video-section video-first-screen"><div class="container"><div class="landing-video-wrap"><div class="landing-intro"><div class="eyebrow">${esc(eyebrow)}</div><h1>${esc(headline)}</h1><p>${esc(subtitle)}</p></div>${player}<div class="landing-action"><div class="eyebrow">${esc(actionEyebrow)}</div><h3>${esc(actionHeadline)}</h3><p>${esc(actionText)}</p>${btn('apply',esc(actionLabel),'button ink landing-primary')}<div class="landing-action-note">No commitment at this stage — the enquiry form is a demonstration.</div></div></div></div></section>`;
 }
-
  function productDetails({kicker,heading,intro,features,benefits,extras,commercial,outcome}){
   return `<section class="product-detail"><div class="container"><div class="product-detail-heading"><div class="eyebrow">${esc(kicker)}</div><h2>${esc(heading)}</h2><p>${esc(intro)}</p></div><div class="product-grid"><div class="product-info-card"><h3>WHAT'S INCLUDED</h3><div class="product-feature-list">${features.map(([title,copy])=>`<div class="product-feature"><b>${esc(title)}</b><p>${esc(copy)}</p></div>`).join('')}</div></div><div class="product-info-card light"><h3>WHAT IT MAKES POSSIBLE</h3><ul class="product-benefits">${benefits.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div></div><div class="product-info-note"><div class="tag">OPTIONS & COMMERCIAL APPROACH · DRAFT</div><p>${esc(extras)}</p><p>${esc(commercial)}</p><div class="product-pricing-note">Illustrative scope and terms — subject to the Sheridan team's final agreement and contract.</div></div><div class="product-outcome"><strong>THE OUTCOME</strong><p>${esc(outcome)}</p></div></div></section>`;
 }
@@ -816,7 +900,7 @@ function validateApplicationStep(index){
 function applicationSubmitted(){return `<section class="application-page"><div class="container"><div class="application-success" role="status"><div class="eyebrow">APPLICATION SUBMITTED</div><h1>YOUR NEXT CHAPTER STARTS HERE.</h1><div class="application-warning"><strong>Demo confirmation — not sent.</strong> This is a website prototype. Your responses are only stored locally in this browser; the Sheridan team has not received an application.</div><h2>Thank you for applying.</h2><p>We'll review your application and, if there's a potential fit, be in touch to arrange a conversation.</p><p>We'll explore your ambition, understand what's possible and show you how we could engineer the journey around your career, family and life.</p><p class="application-closing">The event is the vehicle. The person you become is the win.</p>${btn('home','Return to Home →','button')}</div></div></section>`;}
 function adm(){const tab=adminTab;return `<div class="admin-shell"><div class="admin-head"><div class="container"><div class="eyebrow">PROTOTYPE CMS</div><h1 style="font:800 37px Manrope,sans-serif;letter-spacing:-.05em;margin:8px 0">CONTENT & BUSINESS STUDIO</h1><p class="fine">Editable mock backend. Changes persist in this browser only. Not authenticated or connected to a database.</p></div></div><div class="container admin-grid"><div class="admin-menu">${[['content','Website content'],['packages','Packages'],['videos','Video slots'],['leads','Enquiries & reporting']].map(([x,y])=>`<button data-tab="${x}" class="${x===tab?'active':''}">${y}</button>`).join('')}<button data-reset="1">Reset demo content ↺</button></div><div class="admin-panel">${tab==='content'?`<h2>Site content</h2><p class="smallnote">Edit the homepage messaging, service descriptions and hero image.</p><form id="admin-content"><label>Hero headline<input name="heroTitle" value="${esc(content.heroTitle)}"></label><label>Highlighted words<input name="heroAccent" value="${esc(content.heroAccent)}"></label><label>Hero description<textarea name="heroSubtitle">${esc(content.heroSubtitle)}</textarea></label><label>Hero image URL<input name="heroImage" value="${esc(content.heroImage)}"></label><div class="eyebrow" style="margin:27px 0 13px">THE THREE OFFERS · HOMEPAGE</div><label>Section heading (use a new line to highlight the second line)<textarea name="offersHeading">${esc(content.offersHeading||defaults.offersHeading)}</textarea></label><label>Supporting question<input name="offersQuestion" value="${esc(content.offersQuestion||defaults.offersQuestion)}"></label><div class="admin-row"><label>Offer 01 title<input name="oneTitle" value="${esc(content.oneTitle)}"></label><label>Offer 02 title<input name="docTitle" value="${esc(content.docTitle)}"></label></div><label>Offer 01 description<textarea name="oneDesc">${esc(content.oneDesc)}</textarea></label><label>Offer 01 best for<textarea name="oneBest">${esc(content.oneBest||defaults.oneBest)}</textarea></label><label>Offer 02 description<textarea name="docDesc">${esc(content.docDesc)}</textarea></label><label>Offer 02 best for<textarea name="docBest">${esc(content.docBest||defaults.docBest)}</textarea></label><label>Offer 03 title<input name="corpTitle" value="${esc(content.corpTitle)}"></label><label>Offer 03 description<textarea name="corpDesc">${esc(content.corpDesc)}</textarea></label><label>Offer 03 best for<textarea name="corpBest">${esc(content.corpBest||defaults.corpBest)}</textarea></label><div class="eyebrow" style="margin:27px 0 13px">CAROUSEL IMAGERY</div><label>Offer 01 image URL<input name="oneImage" value="${esc(content.oneImage||defaults.oneImage)}"></label><label>Offer 03 image URL<input name="corpImage" value="${esc(content.corpImage||defaults.corpImage)}"></label><label>Offer 02 image URL<input name="docImage" value="${esc(content.docImage||defaults.docImage)}"></label><button type="submit" class="button">Save changes →</button></form>`:
  tab==='packages'?`<h2>Three product cards</h2><p class="smallnote">Edit the descriptions shown at the bottom of Coaching, First IRONMAN and For Teams. Each button opens its corresponding product page; the separate discovery call links to Apply. Prices and terms are drafts.</p><form id="admin-packages">${content.plans.map((p,i)=>`<div style="border-bottom:1px solid var(--border);margin-bottom:22px"><div class="eyebrow">PRODUCT 0${i+1}</div><div class="admin-row"><label>Product title<input name="name${i}" value="${esc(p.name)}"></label><label>Commercial label<input name="price${i}" value="${esc(p.price)}"></label></div><label>Description<textarea name="description${i}">${esc(p.description)}</textarea></label></div>`).join('')}<button class="button">Save product cards →</button></form>`:
- tab==='videos'?`<h2>Founder video slots</h2><p class="smallnote">Add an existing YouTube URL or video ID. Until then, the prototype displays filming briefs.</p><form id="admin-videos"><label>Homepage founder introduction URL<input name="introVideo" value="${esc(content.introVideo)}" placeholder="https://www.youtube.com/watch?v=..."></label><label>Coaching landing-page introduction URL<input name="coachingVideo" value="${esc(content.coachingVideo||defaults.coachingVideo)}" placeholder="https://www.youtube.com/watch?v=..."></label><label>First IRONMAN landing-page introduction URL<input name="ironmanVideo" value="${esc(content.ironmanVideo||defaults.ironmanVideo)}" placeholder="https://www.youtube.com/watch?v=..."></label><label>For Teams landing-page introduction URL<input name="corporateVideo" value="${esc(content.corporateVideo||defaults.corporateVideo)}" placeholder="https://www.youtube.com/watch?v=..."></label><label>Beyond the Boardroom episode URL<input name="storyVideo" value="${esc(content.storyVideo)}" placeholder="https://youtu.be/..."></label><div class="notice">Suggested films: 60–90 second founder introduction; 2–3 minute 'what the coaching looks like'; client journey film and a corporate keynote clip.</div><button class="button">Save videos →</button></form>`:
+ tab==='videos'?`<h2>Founder video slots</h2><p class="smallnote">Use a YouTube link or a direct MP4/WebM file URL. All videos are click-to-play; no autoplay. The website itself cannot download videos from YouTube.</p><form id="admin-videos"><label>Homepage founder introduction URL<input name="introVideo" value="${esc(content.introVideo)}" placeholder="https://www.youtube.com/watch?v=..."></label><label>Coaching landing-page introduction URL<input name="coachingVideo" value="${esc(content.coachingVideo||defaults.coachingVideo)}" placeholder="https://www.youtube.com/watch?v=..."></label><label>First IRONMAN landing-page introduction URL<input name="ironmanVideo" value="${esc(content.ironmanVideo||defaults.ironmanVideo)}" placeholder="https://www.youtube.com/watch?v=..."></label><label>For Teams landing-page introduction URL<input name="corporateVideo" value="${esc(content.corporateVideo||defaults.corporateVideo)}" placeholder="https://www.youtube.com/watch?v=..."></label><label>Beyond the Boardroom episode URL<input name="storyVideo" value="${esc(content.storyVideo)}" placeholder="https://youtu.be/..."></label><div class="notice">Suggested films: 60–90 second founder introduction; 2–3 minute 'what the coaching looks like'; client journey film and a corporate keynote clip.</div><button class="button">Save videos →</button></form>`:
  `<h2>Enquiries & reporting</h2><p class="smallnote">Sample dashboard structure. Only enquiries submitted in this browser appear; sales and Stripe data aren't connected.</p><div class="admin-row" style="margin-bottom:22px"><div class="admin-metric"><strong>${leads.length}</strong><span>Demo enquiries</span></div><div class="admin-metric"><strong>—</strong><span>Stripe revenue · not connected</span></div></div>${leads.length?`<div style="overflow-x:auto"><table class="table"><thead><tr><th>Name</th><th>Email</th><th>Interested in</th><th>Goal</th></tr></thead><tbody>${leads.map(l=>`<tr><td>${esc(l.name||[l.first,l.last].filter(Boolean).join(' '))}</td><td>${esc(l.email)}</td><td>${esc(l.challenge||l.interest||'—')}</td><td>${esc(l.why||l.goal||'—')}${l.type==='application'?`<details class="lead-details"><summary>View application answers</summary><dl>${[['Timing',l.timeframe],['Current experience',l.experience],['Training hours',l.hours],['Biggest obstacle',l.obstacle],['Why it matters',l.why],['Commitment',l.commitment],['Investment',l.investment]].map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v||'—')}</dd>`).join('')}</dl></details>`:''}</td></tr>`).join('')}</tbody></table></div>`:'<p class="fine">No submissions yet. Try the Apply page and submit the demo form.</p>'}`}</div></div></div>`}
 function selectOffer(next,instant=false){
  const track=document.getElementById('offer-track');if(!track)return;
@@ -830,12 +914,63 @@ function selectOffer(next,instant=false){
  if(instant){track.style.transition='none';track.style.transform='translate3d(-'+px+'px,0,0)';track.offsetHeight;track.style.transition='';}
  else track.style.transform='translate3d(-'+px+'px,0,0)';
 }
+// Testimonial cards loop seamlessly with cloned boundary cards.
+let quotePos=1, quoteCount=0, quoteEntrancePlayed=false, quoteObserver=null;
+function quoteMoveTo(next,animated=true){
+ const track=document.getElementById('spx-quotes-track');if(!track)return;
+ const cards=[...track.children];if(!cards.length)return;
+ quotePos=next;
+ track.style.transition=animated?'transform .52s cubic-bezier(.2,.75,.2,1)':'none';
+ const px=cards[quotePos]?.offsetLeft||0;
+ track.style.transform=`translate3d(-${px}px,0,0)`;
+ const actual=((quotePos-1+quoteCount)%quoteCount)+1;
+ const counter=document.getElementById('spx-testimonial-count');
+ if(counter)counter.innerHTML=String(actual).padStart(2,'0')+' <span>/ '+String(quoteCount).padStart(2,'0')+'</span>';
+}
+function quoteStep(direction){
+ const track=document.getElementById('spx-quotes-track');if(!track||!quoteCount)return;
+ if(quotePos===0)quoteMoveTo(quoteCount,false);
+ if(quotePos===quoteCount+1)quoteMoveTo(1,false);
+ requestAnimationFrame(()=>quoteMoveTo(quotePos+direction,true));
+}
+function setupQuotes(){
+ const track=document.getElementById('spx-quotes-track');if(!track)return;
+ if(quoteObserver){quoteObserver.disconnect();quoteObserver=null}
+ const entries=[...track.querySelectorAll('[data-quote-card]')];quoteCount=entries.length;
+ if(!quoteCount)return;
+ const first=entries[0].cloneNode(true),last=entries[quoteCount-1].cloneNode(true);
+ for(const x of [first,last]){x.classList.add('spx-quote-clone');x.setAttribute('aria-hidden','true');x.setAttribute('inert','')}
+ track.prepend(last);track.append(first);
+ quotePos=1;quoteEntrancePlayed=false;
+ quoteMoveTo(1,false);
+ track.addEventListener('transitionend',e=>{
+  if(e.propertyName!=='transform')return;
+  if(quotePos===0)quoteMoveTo(quoteCount,false);
+  else if(quotePos===quoteCount+1)quoteMoveTo(1,false);
+ });
+ if('IntersectionObserver' in window){
+  quoteObserver=new IntersectionObserver(entries=>{
+   if(!entries.some(e=>e.isIntersecting)||quoteEntrancePlayed)return;
+   quoteEntrancePlayed=true;quoteObserver.disconnect();quoteObserver=null;
+   if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+     // One purposeful movement on entrance; the user controls all later slides.
+     setTimeout(()=>{if(document.getElementById('spx-quotes-track')===track)quoteStep(1)},600);
+   }
+  },{threshold:.28});
+  quoteObserver.observe(document.getElementById('client-stories'));
+ }
+}
+document.addEventListener('click',e=>{
+ const b=e.target.closest('[data-quote-step]');if(b)quoteStep(Number(b.dataset.quoteStep));
+});
+
 let offerTouchX=null;
 document.addEventListener('touchstart',e=>{if(e.target.closest('#offer-window'))offerTouchX=e.changedTouches[0].clientX;},{passive:true});
 document.addEventListener('touchend',e=>{if(offerTouchX==null||!e.target.closest('#offer-window'))return;const d=e.changedTouches[0].clientX-offerTouchX;offerTouchX=null;if(Math.abs(d)>55)selectOffer(offerSlide+(d<0?1:-1));},{passive:true});
-window.addEventListener('resize',()=>{if(route==='home')selectOffer(offerSlide,true)});
+window.addEventListener('resize',()=>{if(route==='home'){selectOffer(offerSlide,true);if(quoteCount)quoteMoveTo(quotePos,false)}});
 document.addEventListener('keydown',e=>{if(e.target.matches('[data-offer-slide]')&&(e.key==='ArrowRight'||e.key==='ArrowLeft')){e.preventDefault();selectOffer(offerSlide+(e.key==='ArrowRight'?1:-1));document.querySelector('[data-offer-slide="'+offerSlide+'"]').focus();}});
-function render(){renderNav();renderFooter();document.getElementById('main').innerHTML=({home,coaching,ironman,corporate,apply,submitted:applicationSubmitted,admin:adm}[route]||home)();renderModal();if(route==='home')requestAnimationFrame(()=>selectOffer(offerSlide,true));}
+
+function render(){renderNav();renderFooter();document.getElementById('main').innerHTML=({home,coaching,ironman,corporate,apply,submitted:applicationSubmitted,admin:adm}[route]||home)();renderModal();if(route==='home'){requestAnimationFrame(()=>{selectOffer(offerSlide,true);setupQuotes()})}}
 function go(x){const jumpStories=x==='stories';const alreadyHome=route==='home';route=jumpStories?'home':x;menu=false;modal=null;if(!jumpStories||!alreadyHome)render();if(jumpStories)document.getElementById('stories-home')?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});else window.scrollTo({top:0,behavior:'smooth'});try{history.replaceState(null,'','#'+(jumpStories?'stories':x))}catch(e){}}
 function ytId(raw){const s=String(raw||'').trim();if(/^[A-Za-z0-9_-]{11}$/.test(s))return s;try{const u=new URL(s);if(['www.youtube.com','youtube.com','m.youtube.com','music.youtube.com'].includes(u.hostname))return u.searchParams.get('v')?.match(/^[\w-]{11}$/)?.[0]||null;if(u.hostname==='youtu.be')return u.pathname.replace('/','').match(/^[\w-]{11}$/)?.[0]||null;}catch(e){}return null}
 function renderModal(){let m=document.getElementById('modal-root');if(!modal){m.innerHTML='';return}let inside='';if(modal.type==='video'){const id=ytId(content[modal.key]);inside=`<div class="eyebrow">SHERIDAN PERFORMANCE / VIDEO</div><h2>${modal.key==='intro'?'MEET THE SHERIDANS':'BEYOND THE BOARDROOM'}</h2>${id?`<div style="aspect-ratio:16/9"><iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1" style="width:100%;height:100%;border:0" allow="autoplay;encrypted-media;picture-in-picture" allowfullscreen title="Sheridan Performance film"></iframe></div>`:`<div class="video-placeholder"><span>YOUR STORY GOES HERE.</span><p>Video placeholder — add a YouTube URL in the demo editor.</p></div><p>For this section: authentic, founder-led talking-to-camera video, intercut with training, work and race-day footage.</p>`}`}
