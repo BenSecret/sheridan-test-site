@@ -514,7 +514,8 @@
     @media(max-width:720px){.story-inline-video{margin-top:23px}}
 
 /* Refinement 2026: Tri Guys-inspired energy, with Sheridan restraint. */
-.spx-hero{min-height:0;height:clamp(525px,60svh,570px)}
+/* Keep the moving credentials strip close to the bottom of the initial desktop viewport. */
+.spx-hero{min-height:0;height:clamp(540px,calc(100svh - 176px),790px)}
 .spx-hero-photo{background-position:center,center center,center center;filter:saturate(.78) contrast(1.13)}
 .spx-hero-scrim{background:linear-gradient(180deg,#11161772 0%,#11161731 24%,#0b10126b 61%,#0b1012d9 100%)}
 .spx-hero-inner{align-items:center;text-align:center;padding-top:34px;padding-bottom:13px}
@@ -680,9 +681,9 @@ function home(){return `
 </section>
 <section class="spx-photo-band">
  <div class="spx-photo-band-image" style="background-image:linear-gradient(90deg,#0e1214ec,#0e121446 72%),url('${heroFallbackImage}')"></div>
- <div class="container spx-photo-band-body"><span class="spx-label">THE LONG GAME / DONE RIGHT</span><h2>THE RACE IS ONE DAY.<br>THE JOURNEY CHANGES MORE.</h2><button class="spx-band-link" data-go="stories">DISCOVER BEYOND THE BOARDROOM <span>↗</span></button></div>
+ <div class="container spx-photo-band-body"><span class="spx-label">THE LONG GAME / DONE RIGHT</span><h2>THE RACE IS ONE DAY.<br>THE JOURNEY CHANGES MORE.</h2><button class="spx-band-link" data-go="ironman">DISCOVER BEYOND THE BOARDROOM <span>↗</span></button></div>
 </section>
-${homeStories()}
+
 <section class="spx-testimonials" id="client-stories">
  <div class="container">
   <div class="spx-testimonials-heading"><div><span class="spx-label">CLIENT STORIES / THE PEOPLE BEHIND THE PROGRESS</span><h2>THE STORIES THAT<br><em>MATTER MOST.</em></h2></div><p>A glimpse of how first-hand experiences could bring the Sheridan approach to life. Real, approved client words will replace these samples.</p></div>
@@ -707,14 +708,6 @@ ${homeStories()}
 <div class="spx-home-form">${apply()}</div>
 `;}
 
-function homeStories(){
- const raw=content.storyVideo||content.ironmanVideo||defaults.ironmanVideo;
- const filmId=ytId(raw),filmFile=html5Source(raw);
- const media=videoMarkup(raw,'Beyond the Boardroom documentary film');
- const watchLink=filmFile?`<a href="${esc(filmFile)}" target="_blank" rel="noopener noreferrer">OPEN VIDEO ↗</a>`:`<a href="https://www.youtube.com/watch?v=${filmId}" target="_blank" rel="noopener noreferrer">WATCH DIRECTLY ON YOUTUBE ↗</a>`;
- const film=media?`<div class="story-inline-video"><div class="landing-video-frame">${media}</div><div class="landing-video-footer"><span>STORIES / ${filmFile?'CLICK TO PLAY':'WATCH THE FILM'}</span>${watchLink}</div></div>`:`<div class="story-hero"><div><div class="eyebrow">ORIGINAL DOCUMENTARY SERIES</div><h2>BEYOND THE<br>BOARDROOM</h2><button class="play-trigger" data-video="story"><span class="play-circle">▷</span> WATCH THE FEATURE</button></div></div>`;
- return `<section class="story-home" id="stories-home"><div class="container"><div class="eyebrow">STORIES / BEYOND THE BOARDROOM</div><div class="product-detail-heading"><h2>EVERY FINISH LINE<br>HAS A STORY.</h2><p>The effort, the setbacks, the people and the breakthroughs behind a meaningful physical challenge. Sheridan Performance captures the journey, not just the result.</p></div>${film}<div class="story-summary"><h3>STORIES WORTH<br>REMEMBERING.</h3><p>From a first IRONMAN to a shared corporate challenge, the greatest achievements become even more meaningful when the people and experiences behind them are remembered. <button class="text-link" data-go="ironman">Explore the first-IRONMAN journey ↗</button></p></div></div></section>`;
-}
  function pageTop(k,title,sub,klass=''){return `<div class="page-header ${klass}"><div class="container"><div class="eyebrow">${k}</div><h1>${title}</h1><p>${sub}</p></div></div>`}
 function plans(){return `<section class="section next-step-section"><div class="container">${sectionHeader('THE NEXT STEP','CHOOSE YOUR<br><span class="accent-text">JOURNEY.</span>','Three ways to achieve something extraordinary. Explore the right approach for your goals.')}<div class="plans">${content.plans.map((p,i)=>`<article class="plan ${i===1?'featured':''}"><span class="kind">0${i+1} / ${esc(p.kind)}</span><h3>${esc(p.name)}</h3><p>${esc(p.description)}</p><div class="rate">${esc(p.price)}</div><button class="button ${i===1?'':'outline'}" data-go="${p.route||defaults.plans[i]?.route||'apply'}">${esc(p.cta||defaults.plans[i]?.cta||'Explore offer')} ↗</button></article>`).join('')}</div><div class="discovery-cta"><div><div class="eyebrow">NOT SURE WHERE TO BEGIN?</div><h3>LET'S FIND YOUR STARTING LINE.</h3><p>Tell us what you're working towards. We'll help you find the right approach.</p></div>${btn('apply','Book a discovery call ↗','button ink discovery-button')}</div><p class="offer-disclaimer">All packages and commercial terms are illustrative until confirmed by the Sheridan team.</p></div></section>`}
 function html5Source(raw){
@@ -924,47 +917,66 @@ function selectOffer(next,instant=false){
  if(instant){track.style.transition='none';track.style.transform='translate3d(-'+px+'px,0,0)';track.offsetHeight;track.style.transition='';}
  else track.style.transform='translate3d(-'+px+'px,0,0)';
 }
-// Testimonial cards loop seamlessly with cloned boundary cards.
-let quotePos=1, quoteCount=0, quoteEntrancePlayed=false, quoteObserver=null;
+// Testimonial carousel: duplicate the ENTIRE six-card set either side of the originals.
+// One cloned boundary card is not enough when three or four cards fit across the viewport:
+// it leaves a blank end-of-track region. Three complete sets guarantee continuous cards.
+let quotePos=0, quoteCount=0, quoteEntrancePlayed=false, quoteObserver=null;
+let quoteAnimating=false, quoteQueued=0;
 function quoteMoveTo(next,animated=true){
- const track=document.getElementById('spx-quotes-track');if(!track)return;
- const cards=[...track.children];if(!cards.length)return;
+ const track=document.getElementById('spx-quotes-track');if(!track||!quoteCount)return;
+ const cards=track.children;
  quotePos=next;
- track.style.transition=animated?'transform .52s cubic-bezier(.2,.75,.2,1)':'none';
  const px=cards[quotePos]?.offsetLeft||0;
+ track.style.transition=animated?'transform .52s cubic-bezier(.2,.75,.2,1)':'none';
  track.style.transform=`translate3d(-${px}px,0,0)`;
- const actual=((quotePos-1+quoteCount)%quoteCount)+1;
+ const actual=((quotePos-quoteCount)%quoteCount+quoteCount)%quoteCount+1;
  const counter=document.getElementById('spx-testimonial-count');
  if(counter)counter.innerHTML=String(actual).padStart(2,'0')+' <span>/ '+String(quoteCount).padStart(2,'0')+'</span>';
 }
+function quoteFinishMove(){
+ // Jump invisibly between identical copies only AFTER the animated slide has completed.
+ if(quotePos<quoteCount)quoteMoveTo(quotePos+quoteCount,false);
+ else if(quotePos>=quoteCount*2)quoteMoveTo(quotePos-quoteCount,false);
+ quoteAnimating=false;
+ if(quoteQueued){
+  const dir=Math.sign(quoteQueued);quoteQueued-=dir;
+  requestAnimationFrame(()=>quoteStep(dir));
+ }
+}
 function quoteStep(direction){
  const track=document.getElementById('spx-quotes-track');if(!track||!quoteCount)return;
- if(quotePos===0)quoteMoveTo(quoteCount,false);
- if(quotePos===quoteCount+1)quoteMoveTo(1,false);
- requestAnimationFrame(()=>quoteMoveTo(quotePos+direction,true));
+ const dir=direction<0?-1:1;
+ if(quoteAnimating){quoteQueued=Math.max(-12,Math.min(12,quoteQueued+dir));return;}
+ const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ quoteAnimating=!reducedMotion;
+ quoteMoveTo(quotePos+dir,!reducedMotion);
+ if(reducedMotion)quoteFinishMove();
 }
 function setupQuotes(){
  const track=document.getElementById('spx-quotes-track');if(!track)return;
- if(quoteObserver){quoteObserver.disconnect();quoteObserver=null}
- const entries=[...track.querySelectorAll('[data-quote-card]')];quoteCount=entries.length;
- if(!quoteCount)return;
- const first=entries[0].cloneNode(true),last=entries[quoteCount-1].cloneNode(true);
- for(const x of [first,last]){x.classList.add('spx-quote-clone');x.setAttribute('aria-hidden','true');x.setAttribute('inert','')}
- track.prepend(last);track.append(first);
- quotePos=1;quoteEntrancePlayed=false;
- quoteMoveTo(1,false);
+ if(quoteObserver){quoteObserver.disconnect();quoteObserver=null;}
+ const originals=[...track.querySelectorAll('[data-quote-card]:not(.spx-quote-clone)')];
+ quoteCount=originals.length;if(!quoteCount)return;
+ const cloneSet=()=>originals.map(card=>{
+  const copy=card.cloneNode(true);
+  copy.classList.add('spx-quote-clone');copy.setAttribute('aria-hidden','true');
+  copy.setAttribute('inert','');
+  return copy;
+ });
+ track.prepend(...cloneSet());track.append(...cloneSet());
+ quotePos=quoteCount;quoteQueued=0;quoteAnimating=false;quoteEntrancePlayed=false;
+ quoteMoveTo(quotePos,false);
  track.addEventListener('transitionend',e=>{
-  if(e.propertyName!=='transform')return;
-  if(quotePos===0)quoteMoveTo(quoteCount,false);
-  else if(quotePos===quoteCount+1)quoteMoveTo(1,false);
+  if(e.target!==track||e.propertyName!=='transform'||!quoteAnimating)return;
+  quoteFinishMove();
  });
  if('IntersectionObserver' in window){
   quoteObserver=new IntersectionObserver(entries=>{
    if(!entries.some(e=>e.isIntersecting)||quoteEntrancePlayed)return;
    quoteEntrancePlayed=true;quoteObserver.disconnect();quoteObserver=null;
    if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-     // One purposeful movement on entrance; the user controls all later slides.
-     setTimeout(()=>{if(document.getElementById('spx-quotes-track')===track)quoteStep(1)},600);
+    // One introductory slide as the section enters view, then manual navigation.
+    setTimeout(()=>{if(document.getElementById('spx-quotes-track')===track)quoteStep(1)},600);
    }
   },{threshold:.28});
   quoteObserver.observe(document.getElementById('client-stories'));
@@ -981,7 +993,7 @@ window.addEventListener('resize',()=>{if(route==='home'){selectOffer(offerSlide,
 document.addEventListener('keydown',e=>{if(e.target.matches('[data-offer-slide]')&&(e.key==='ArrowRight'||e.key==='ArrowLeft')){e.preventDefault();selectOffer(offerSlide+(e.key==='ArrowRight'?1:-1));document.querySelector('[data-offer-slide="'+offerSlide+'"]').focus();}});
 
 function render(){renderNav();renderFooter();document.getElementById('main').innerHTML=({home,coaching,ironman,corporate,apply,submitted:applicationSubmitted,admin:adm}[route]||home)();renderModal();if(route==='home'){requestAnimationFrame(()=>{selectOffer(offerSlide,true);setupQuotes()})}}
-function go(x){const jumpStories=x==='stories';const alreadyHome=route==='home';route=jumpStories?'home':x;menu=false;modal=null;if(!jumpStories||!alreadyHome)render();if(jumpStories)document.getElementById('stories-home')?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});else window.scrollTo({top:0,behavior:'smooth'});try{history.replaceState(null,'','#'+(jumpStories?'stories':x))}catch(e){}}
+function go(x){const jumpStories=x==='stories';const alreadyHome=route==='home';route=jumpStories?'home':x;menu=false;modal=null;if(!jumpStories||!alreadyHome)render();if(jumpStories)document.getElementById('client-stories')?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});else window.scrollTo({top:0,behavior:'smooth'});try{history.replaceState(null,'','#'+(jumpStories?'stories':x))}catch(e){}}
 function ytId(raw){const s=String(raw||'').trim();if(/^[A-Za-z0-9_-]{11}$/.test(s))return s;try{const u=new URL(s);if(['www.youtube.com','youtube.com','m.youtube.com','music.youtube.com'].includes(u.hostname))return u.searchParams.get('v')?.match(/^[\w-]{11}$/)?.[0]||null;if(u.hostname==='youtu.be')return u.pathname.replace('/','').match(/^[\w-]{11}$/)?.[0]||null;}catch(e){}return null}
 function renderModal(){let m=document.getElementById('modal-root');if(!modal){m.innerHTML='';return}let inside='';if(modal.type==='video'){const id=ytId(content[modal.key]);inside=`<div class="eyebrow">SHERIDAN PERFORMANCE / VIDEO</div><h2>${modal.key==='intro'?'MEET THE SHERIDANS':'BEYOND THE BOARDROOM'}</h2>${id?`<div style="aspect-ratio:16/9"><iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1" style="width:100%;height:100%;border:0" allow="autoplay;encrypted-media;picture-in-picture" allowfullscreen title="Sheridan Performance film"></iframe></div>`:`<div class="video-placeholder"><span>YOUR STORY GOES HERE.</span><p>Video placeholder — add a YouTube URL in the demo editor.</p></div><p>For this section: authentic, founder-led talking-to-camera video, intercut with training, work and race-day footage.</p>`}`}
 if(modal.type==='checkout'){const p=content.plans[modal.index]||content.plans[0];inside=`<div class="eyebrow">CHECKOUT PROTOTYPE</div><h2>${esc(p.name)}</h2><p>${esc(p.description)}</p><div class="notice">DEMO MODE · This is not a real purchase. No card data or money will be collected.</div><label>Package status<input readonly value="${esc(p.price)}"></label><button class="button" data-mockbuy="${modal.index}">Simulate checkout →</button><p class="fine">When Stripe is configured, this button can redirect to Stripe Checkout in test mode using the included API example.</p>`}
@@ -1013,7 +1025,7 @@ document.addEventListener('submit',e=>{const f=e.target;if(!f.id)return;e.preven
   d.type='application';d.interest=d.challenge;d.goal=d.why;d.date=new Date().toISOString();
   leads.unshift(d);save();go('submitted');return;
  }if(f.id==='enquiry'){leads.unshift({...d,date:new Date().toISOString()});save();modal={type:'enquiry'};renderModal();f.reset();return}if(f.id==='admin-content'){for(const k of ['heroTitle','heroAccent','heroSubtitle','heroImage','offersHeading','offersQuestion','oneTitle','oneDesc','oneBest','corpTitle','corpDesc','corpBest','docTitle','docDesc','docBest','oneImage','corpImage','docImage'])content[k]=d[k]||'';save();render();alert('Changes saved in this browser.');return}if(f.id==='admin-packages'){content.plans.forEach((p,i)=>{p.name=d['name'+i]||'';p.price=d['price'+i]||'';p.description=d['description'+i]||''});save();render();alert('Packages updated.');return}if(f.id==='admin-videos'){content.introVideo=d.introVideo||'';content.coachingVideo=d.coachingVideo||'';content.ironmanVideo=d.ironmanVideo||'';content.corporateVideo=d.corporateVideo||'';content.storyVideo=d.storyVideo||'';save();render();alert('Video links saved.');return}});
-const start=location.hash.replace('#','');if(['home','coaching','ironman','corporate','apply','submitted','admin'].includes(start))route=start;else if(start==='stories')route='home';render();if(start==='stories')requestAnimationFrame(()=>document.getElementById('stories-home')?.scrollIntoView());
+const start=location.hash.replace('#','');if(['home','coaching','ironman','corporate','apply','submitted','admin'].includes(start))route=start;else if(start==='stories')route='home';render();if(start==='stories')requestAnimationFrame(()=>document.getElementById('client-stories')?.scrollIntoView());
 })();
 </script>
 </body>
