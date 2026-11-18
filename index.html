@@ -586,16 +586,16 @@
        Existing carousel transforms and the moving credentials strip are untouched. */
     html.sp-scroll-reveals .sp-scroll-reveal {
       opacity: 0;
-      transform: translate3d(0, 26px, 0);
+      transform: translate3d(0, 44px, 0);
     }
     /* Wait one painted frame before arming transitions: no initial fade-out flash. */
     html.sp-scroll-reveals.sp-scroll-reveals-armed .sp-scroll-reveal {
-      transition: opacity 780ms cubic-bezier(.22,1,.36,1),
-                  transform 780ms cubic-bezier(.22,1,.36,1);
+      transition: opacity 960ms cubic-bezier(.22,1,.36,1),
+                  transform 960ms cubic-bezier(.22,1,.36,1);
       transition-delay: var(--sp-reveal-delay, 0ms);
     }
     html.sp-scroll-reveals .sp-scroll-reveal.sp-from-left {
-      transform: translate3d(-38px, 0, 0);
+      transform: translate3d(-62px, 0, 0);
     }
     html.sp-scroll-reveals .sp-scroll-reveal.sp-fade-only {
       transform: none;
@@ -1057,30 +1057,30 @@ function setupHomeScrollReveals() {
   const targets = [
     // Hero: progressive fade-up gives the opening some life, without moving the image.
     ['.spx-hero-kicker', 'up', 0],
-    ['.spx-hero h1', 'up', 90],
-    ['.spx-hero-inner > p', 'up', 170],
-    ['.spx-hero-actions', 'up', 260],
+    ['.spx-hero h1', 'up', 120],
+    ['.spx-hero-inner > p', 'up', 225],
+    ['.spx-hero-actions', 'up', 330],
     // The moving credentials marquee is deliberately excluded.
     ['.offer-intro .eyebrow', 'up', 0],
-    ['.offer-intro h2', 'up', 90],
-    ['.offer-intro p', 'up', 170],
+    ['.offer-intro h2', 'up', 130],
+    ['.offer-intro p', 'up', 235],
     ['.offer-selectors', 'up', 110],
     ['.offer-window', 'fade', 90],
     ['.offer-after', 'up', 60],
     // Stories animate as a section; the continuously moving quote track is excluded.
     ['.spx-testimonials-heading > div', 'left', 0],
-    ['.spx-testimonials-heading > p', 'up', 110],
+    ['.spx-testimonials-heading > p', 'up', 165],
     ['.spx-quotes-viewport', 'fade', 100],
     ['.spx-testimonials-bottom', 'up', 0],
     // Cinematic band and editorial detail.
     ['.spx-photo-band-body', 'left', 0],
     ['.spx-diff-heading > div:first-child', 'left', 0],
-    ['.spx-diff-heading > div:last-child', 'up', 130],
-    ['.spx-diff-grid article', 'up', 0, 85],
+    ['.spx-diff-heading > div:last-child', 'up', 180],
+    ['.spx-diff-grid article', 'up', 0, 110],
     // Application intro and the form card, but not the individual form controls.
     ['.spx-application-lead .spx-label', 'up', 0],
-    ['.spx-application-lead-inner h2', 'left', 80],
-    ['.spx-application-lead-inner p', 'up', 150],
+    ['.spx-application-lead-inner h2', 'left', 110],
+    ['.spx-application-lead-inner p', 'up', 205],
     ['.spx-home-form .application-card', 'up', 80]
   ];
   const seen = new Set();
@@ -1103,7 +1103,7 @@ function setupHomeScrollReveals() {
       entry.target.classList.add('sp-is-visible');
       homeRevealObserver?.unobserve(entry.target); // one entrance per visit, never re-hide
     }
-  }, {rootMargin: '0px 0px -7% 0px', threshold: 0.08});
+  }, {rootMargin: '0px 0px -9% 0px', threshold: 0.1});
   // Allow the hidden initial frame to paint before the entrance transitions begin.
   requestAnimationFrame(() => {
     if (route !== 'home' || !homeRevealObserver ||
