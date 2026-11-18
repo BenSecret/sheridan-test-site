@@ -580,6 +580,37 @@
     @media(max-width:720px){
       .spx-hero-bottom{padding:0 25px;bottom:17px}
     }
+
+    /* Sheridan homepage: understated, scroll-triggered editorial entrances.
+       Effects are enabled only after JavaScript initialises an observer.
+       Existing carousel transforms and the moving credentials strip are untouched. */
+    html.sp-scroll-reveals .sp-scroll-reveal {
+      opacity: 0;
+      transform: translate3d(0, 26px, 0);
+    }
+    /* Wait one painted frame before arming transitions: no initial fade-out flash. */
+    html.sp-scroll-reveals.sp-scroll-reveals-armed .sp-scroll-reveal {
+      transition: opacity 780ms cubic-bezier(.22,1,.36,1),
+                  transform 780ms cubic-bezier(.22,1,.36,1);
+      transition-delay: var(--sp-reveal-delay, 0ms);
+    }
+    html.sp-scroll-reveals .sp-scroll-reveal.sp-from-left {
+      transform: translate3d(-38px, 0, 0);
+    }
+    html.sp-scroll-reveals .sp-scroll-reveal.sp-fade-only {
+      transform: none;
+    }
+    html.sp-scroll-reveals .sp-scroll-reveal.sp-is-visible {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html.sp-scroll-reveals .sp-scroll-reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+    }
 </style>
 </head>
 <body>
@@ -1010,7 +1041,79 @@ document.addEventListener('touchend',e=>{if(offerTouchX==null||!e.target.closest
 window.addEventListener('resize',()=>{if(route==='home'){selectOffer(offerSlide,true);if(quoteCount)quoteMoveTo(quotePos,false)}});
 document.addEventListener('keydown',e=>{if(e.target.matches('[data-offer-slide]')&&(e.key==='ArrowRight'||e.key==='ArrowLeft')){e.preventDefault();selectOffer(offerSlide+(e.key==='ArrowRight'?1:-1));document.querySelector('[data-offer-slide="'+offerSlide+'"]').focus();}});
 
-function render(){renderNav();renderFooter();document.getElementById('main').innerHTML=({home,coaching,ironman,corporate,apply,submitted:applicationSubmitted,admin:adm}[route]||home)();renderModal();if(route==='home'){requestAnimationFrame(()=>{selectOffer(offerSlide,true);setupQuotes()})}}
+
+// Homepage reveal choreography. Never animate the tracks of either carousel:
+// each carousel manages its own transform and we must not interfere with it.
+let homeRevealObserver = null;
+function setupHomeScrollReveals() {
+  if (homeRevealObserver) {
+    homeRevealObserver.disconnect();
+    homeRevealObserver = null;
+  }
+  document.documentElement.classList.remove('sp-scroll-reveals', 'sp-scroll-reveals-armed');
+  if (route !== 'home' || !('IntersectionObserver' in window) ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const targets = [
+    // Hero: progressive fade-up gives the opening some life, without moving the image.
+    ['.spx-hero-kicker', 'up', 0],
+    ['.spx-hero h1', 'up', 90],
+    ['.spx-hero-inner > p', 'up', 170],
+    ['.spx-hero-actions', 'up', 260],
+    // The moving credentials marquee is deliberately excluded.
+    ['.offer-intro .eyebrow', 'up', 0],
+    ['.offer-intro h2', 'up', 90],
+    ['.offer-intro p', 'up', 170],
+    ['.offer-selectors', 'up', 110],
+    ['.offer-window', 'fade', 90],
+    ['.offer-after', 'up', 60],
+    // Stories animate as a section; the continuously moving quote track is excluded.
+    ['.spx-testimonials-heading > div', 'left', 0],
+    ['.spx-testimonials-heading > p', 'up', 110],
+    ['.spx-quotes-viewport', 'fade', 100],
+    ['.spx-testimonials-bottom', 'up', 0],
+    // Cinematic band and editorial detail.
+    ['.spx-photo-band-body', 'left', 0],
+    ['.spx-diff-heading > div:first-child', 'left', 0],
+    ['.spx-diff-heading > div:last-child', 'up', 130],
+    ['.spx-diff-grid article', 'up', 0, 85],
+    // Application intro and the form card, but not the individual form controls.
+    ['.spx-application-lead .spx-label', 'up', 0],
+    ['.spx-application-lead-inner h2', 'left', 80],
+    ['.spx-application-lead-inner p', 'up', 150],
+    ['.spx-home-form .application-card', 'up', 80]
+  ];
+  const seen = new Set();
+  const nodes = [];
+  for (const [selector, direction, delay, step=0] of targets) {
+    document.querySelectorAll(selector).forEach((el, i) => {
+      if (seen.has(el)) return;
+      seen.add(el);
+      el.classList.add('sp-scroll-reveal');
+      if (direction === 'left') el.classList.add('sp-from-left');
+      if (direction === 'fade') el.classList.add('sp-fade-only');
+      el.style.setProperty('--sp-reveal-delay', `${Math.min(delay + i * step, 350)}ms`);
+      nodes.push(el);
+    });
+  }
+  document.documentElement.classList.add('sp-scroll-reveals');
+  homeRevealObserver = new IntersectionObserver(entries => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      entry.target.classList.add('sp-is-visible');
+      homeRevealObserver?.unobserve(entry.target); // one entrance per visit, never re-hide
+    }
+  }, {rootMargin: '0px 0px -7% 0px', threshold: 0.08});
+  // Allow the hidden initial frame to paint before the entrance transitions begin.
+  requestAnimationFrame(() => {
+    if (route !== 'home' || !homeRevealObserver ||
+        !document.documentElement.classList.contains('sp-scroll-reveals')) return;
+    document.documentElement.classList.add('sp-scroll-reveals-armed');
+    nodes.forEach(el => homeRevealObserver.observe(el));
+  });
+}
+
+function render(){renderNav();renderFooter();document.getElementById('main').innerHTML=({home,coaching,ironman,corporate,apply,submitted:applicationSubmitted,admin:adm}[route]||home)();renderModal();if(route==='home'){requestAnimationFrame(()=>{selectOffer(offerSlide,true);setupQuotes();setupHomeScrollReveals()})}else{if(homeRevealObserver){homeRevealObserver.disconnect();homeRevealObserver=null;}document.documentElement.classList.remove('sp-scroll-reveals', 'sp-scroll-reveals-armed')}}
 function go(x){const jumpStories=x==='stories';const alreadyHome=route==='home';route=jumpStories?'home':x;menu=false;modal=null;if(!jumpStories||!alreadyHome)render();if(jumpStories)document.getElementById('client-stories')?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});else window.scrollTo({top:0,behavior:'smooth'});try{history.replaceState(null,'','#'+(jumpStories?'stories':x))}catch(e){}}
 function ytId(raw){const s=String(raw||'').trim();if(/^[A-Za-z0-9_-]{11}$/.test(s))return s;try{const u=new URL(s);if(['www.youtube.com','youtube.com','m.youtube.com','music.youtube.com'].includes(u.hostname))return u.searchParams.get('v')?.match(/^[\w-]{11}$/)?.[0]||null;if(u.hostname==='youtu.be')return u.pathname.replace('/','').match(/^[\w-]{11}$/)?.[0]||null;}catch(e){}return null}
 function renderModal(){let m=document.getElementById('modal-root');if(!modal){m.innerHTML='';return}let inside='';if(modal.type==='video'){const id=ytId(content[modal.key]);inside=`<div class="eyebrow">SHERIDAN PERFORMANCE / VIDEO</div><h2>${modal.key==='intro'?'MEET THE SHERIDANS':'BEYOND THE BOARDROOM'}</h2>${id?`<div style="aspect-ratio:16/9"><iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1" style="width:100%;height:100%;border:0" allow="autoplay;encrypted-media;picture-in-picture" allowfullscreen title="Sheridan Performance film"></iframe></div>`:`<div class="video-placeholder"><span>YOUR STORY GOES HERE.</span><p>Video placeholder — add a YouTube URL in the demo editor.</p></div><p>For this section: authentic, founder-led talking-to-camera video, intercut with training, work and race-day footage.</p>`}`}
